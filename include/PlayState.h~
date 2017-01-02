@@ -1,0 +1,35 @@
+//PlayState.h
+#ifndef _PLAY_STATE_H
+#define _PLAY_STATE_H
+#include "GameState.h"
+#include "World.h"
+#include "Player.h"
+#include "BrickRemover.h"
+class PlayState : public GameState
+{
+	public:	
+		PlayState();
+		~PlayState();
+		virtual void Init();
+		virtual void Cleanup();
+
+		virtual void Pause();
+		virtual void Resume();
+
+		virtual void Update(GameEngine* game);
+		virtual void Draw(GameEngine* game);
+		virtual void HandleInput(GameEngine* game);
+
+		/*// inherited
+		void ChangeState(GameEngine* game, GameState* state) 
+		{
+   			game->ChangeState(state);
+  		}*/
+	private:
+		World* m_world;
+		BrickRemover* m_bRemover;
+		Player* m_player;
+		double m_lastClock
+		bool m_running;
+};
+#endif

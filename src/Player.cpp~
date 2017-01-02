@@ -33,7 +33,10 @@ void Player::SetActor(Actor* actor)
 		return;
 	}
 	m_actor = actor;
-	m_actor->SetPlayer(this);
+	if(m_actor != nullptr)
+	{
+		m_actor->SetPlayer(this);
+	}
 }
 
 int Player::GetLives()

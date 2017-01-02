@@ -37,6 +37,8 @@ void World::Draw()
 
 void World::Add(GameObject* object)
 {
+	std::cout << this <<std::endl;
+	std::cout << std::flush;
 	if(object != nullptr)
 	{
 		m_objList.push_back(object);

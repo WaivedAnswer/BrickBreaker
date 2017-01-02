@@ -27,7 +27,7 @@ void BrickRemover::RemoveBricks()
 
 	for(std::list<Brick*>::iterator it = m_removeList.begin(); it != m_removeList.end(); ++it)
 	{
-		m_world->Remove(*it); 
+		WORLD->Remove(*it); 
 	}
 
 	m_removeList.clear();
