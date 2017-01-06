@@ -29,7 +29,7 @@ class PlayState : public GameState
 		World* m_world;
 		BrickRemover* m_bRemover;
 		Player* m_player;
-		double m_lastClock
+		double m_lastClock;
 		bool m_running;
 };
 #endif

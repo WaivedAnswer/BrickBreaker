@@ -217,7 +217,7 @@ int main( int argc, char* args[] )
 	std::clock_t lastClock;
 	double ftime = 0.0;
 	GameEngine* game = new GameEngine();
-	game->PushState(new PlayState());
+	game->PushState(new MenuState());
 	/*WORLD = new World();
 	WORLD->CreateWorld();
 	BrickRemover* bRemover = new BrickRemover(WORLD);

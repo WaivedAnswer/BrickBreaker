@@ -19,6 +19,7 @@ and may not be redistributed without written permission.*/
 #include "Player.h"
 #include "BrickRemover.h"
 #include "PlayState.h"
+#include "MenuState.h"
 #include "GameEngine.h"
 #include <iostream>
 #include <list>
@@ -217,7 +218,7 @@ int main( int argc, char* args[] )
 	std::clock_t lastClock;
 	double ftime = 0.0;
 	GameEngine* game = new GameEngine();
-	game->PushState(new PlayState());
+	game->PushState(new MenuState());
 	/*WORLD = new World();
 	WORLD->CreateWorld();
 	BrickRemover* bRemover = new BrickRemover(WORLD);

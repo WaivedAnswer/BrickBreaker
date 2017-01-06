@@ -1,16 +1,13 @@
-//PlayState.h
-#ifndef _PLAY_STATE_H
-#define _PLAY_STATE_H
+//MenuState.h
+#ifndef _MENU_STATE_H
+#define _MENU_STATE_H
 #include "GameState.h"
-#include "World.h"
-#include "Player.h"
-#include "BrickRemover.h"
-//TODO create singleton
-class PlayState : public GameState
+
+class MenuState : public GameState
 {
 	public:	
-		PlayState();
-		~PlayState();
+		MenuState();
+		~MenuState();
 		virtual void Init();
 		virtual void Cleanup();
 
@@ -27,10 +24,6 @@ class PlayState : public GameState
    			game->ChangeState(state);
   		}*/
 	private:
-		World* m_world;
-		BrickRemover* m_bRemover;
-		Player* m_player;
-		double m_lastClock;
 		bool m_running;
 };
 #endif
