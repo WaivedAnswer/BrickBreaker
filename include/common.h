@@ -10,6 +10,8 @@ extern World* WORLD;
 
 const int COORDNUM = 2;
 
+const float DEFAULT_BALL_SPEED = 0.1;
+const float DEFAULT_ACTOR_SPEED = 0.1;
 
 enum Directions
 {

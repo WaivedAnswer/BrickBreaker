@@ -10,7 +10,7 @@
 #include "World.h"
 Ball::Ball()
 {
-	m_speed = 0.15;
+	m_speed = DEFAULT_BALL_SPEED;
 	m_angle = -M_PI/2.0;
 	m_dimensions[0] = 2.5;
 	m_dimensions[1] = 2.5;
