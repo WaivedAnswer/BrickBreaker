@@ -2,6 +2,8 @@
 #ifndef _MENU_STATE_H
 #define _MENU_STATE_H
 #include "GameState.h"
+#include "Menu.h"
+
 //TODO create singleton
 class MenuState : public GameState
 {
@@ -25,5 +27,6 @@ class MenuState : public GameState
   		}*/
 	private:
 		bool m_running;
+		Menu* m_menu;
 };
 #endif

@@ -1,0 +1,39 @@
+//CompositeNode.h
+#ifndef _COMPOSITE_NODE_H
+#define _COMPOSITE_NODE_H
+#include "MenuNode.h"
+#include <string>
+#include <list>
+//composite menu node that contains subitem menunodes eg. options etc.
+//selecting expands view to be current node
+class CompositeNode : public MenuNode
+{
+	public:
+		CompositeNode(std::string name);
+		~CompositeNode();
+
+		virtual void Add(MenuNode* node);
+		virtual void Remove(MenuNode* node);
+		virtual void Display();
+		//sets this menu node as current selection in menu
+		virtual void Select(Menu* menu);
+		//switches selection highlight to next child node
+		virtual void SelectNext();
+		//switches selection highlight to next child node
+		virtual void SelectPrev();
+		//Gets currently selected menu node
+		virtual MenuNode* GetCurrSelection();
+
+		virtual int GetChildCount();
+		//inherited from MenuNode along with name
+		/*
+		std::string GetName()
+		*/
+
+	private:
+		std::list<MenuNode*> m_children;
+		std::list<MenuNode*>::iterator m_selectedChild;
+};
+#endif
+
+

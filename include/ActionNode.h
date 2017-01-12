@@ -1,0 +1,29 @@
+//ActionNode.h
+#ifndef _ACTION_NODE_H
+#define _ACTION_NODE_H
+
+#include "MenuNode.h"
+#include <string>
+//menu node that triggers an action or event in menu (leaf nodes of menu) 
+//selecting causes and action to occur
+class ActionNode : public MenuNode
+{
+	public:
+		ActionNode(std::string name);
+		~ActionNode();
+
+		virtual void Display();
+
+		//selects current node
+		virtual void Select(Menu* menu);
+
+		//inherited from MenuNode along with name
+		/*
+		std::string GetName()
+		{
+			return m_name;
+		}
+		*/
+	private:
+};
+#endif

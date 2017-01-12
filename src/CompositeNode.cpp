@@ -1,0 +1,116 @@
+//CompositeNode.cpp
+#include "CompositeNode.h"
+#include "SDL2/SDL.h"
+#include "common.h"
+#include "commonSDL.h"
+#include <iostream>
+#include <algorithm>
+
+CompositeNode::CompositeNode(std::string name) : MenuNode(name)
+{
+	m_selectedChild = m_children.begin();
+}
+CompositeNode::~CompositeNode()
+{
+	for(std::list<MenuNode*>::iterator it = m_children.begin(); it != m_children.end(); ++it)
+	{
+		delete *it;
+	}
+	m_children.clear();
+}
+
+void CompositeNode::Add(MenuNode* node)
+{
+	if(node != nullptr)
+	{
+		m_children.push_back(node);
+	}
+	m_selectedChild = m_children.begin();
+}
+void CompositeNode::Remove(MenuNode* node)
+{
+	if(node == nullptr)
+	{
+		return;
+	}
+	std::list<MenuNode*>::iterator it = std::find(m_children.begin(), m_children.end(), node);
+	if(it != m_children.end())
+	{
+		delete *it;
+		m_children.erase(it);
+	}
+
+	m_selectedChild = m_children.begin();
+}
+void CompositeNode::Display()
+{
+	std::cout << this->GetName() << std::endl;
+
+	for(std::list<MenuNode*>::iterator it = m_children.begin(); it != m_children.end(); ++it)
+	{
+		if(it == m_selectedChild)
+		{
+			std::cout << "\t" << (*it)->GetName() << "*\n";
+		}
+		else
+		{
+			std::cout << "\t" << (*it)->GetName() << std::endl;
+		}
+		
+	}
+}
+//sets current menu node as current selection in menu
+void CompositeNode::Select(Menu* menu)
+{
+	if(menu != nullptr)
+	{
+		menu->SetCurrent(this);
+	}
+}
+
+//switches selection highlight to next child node
+void CompositeNode::SelectNext()
+{
+	if(m_children.empty())
+	{
+		return;
+	}
+
+	m_selectedChild++;
+	if(m_selectedChild == m_children.end())
+	{
+		m_selectedChild = m_children.begin();
+	}
+}
+//switches selection highlight to next child node
+void CompositeNode::SelectPrev()
+{
+	if(m_children.empty())
+	{
+		return;
+	}
+	else if(m_selectedChild == m_children.begin())
+	{
+		m_selectedChild = m_children.end();
+	}
+	
+	m_selectedChild--;
+}
+//Gets currently selected menu node
+MenuNode* CompositeNode::GetCurrSelection()
+{
+	if(m_selectedChild != m_children.end())
+	{
+		return *m_selectedChild;
+	}
+	else
+	{
+		return nullptr;
+	}
+}
+
+int CompositeNode::GetChildCount()
+{
+	return m_children.size();
+}
+

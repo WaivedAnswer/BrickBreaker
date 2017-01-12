@@ -1,0 +1,93 @@
+//Menu.cpp
+#include "Menu.h"
+#include "MenuNode.h"
+#include "CompositeNode.h"
+
+Menu::Menu()
+{
+	m_root = new CompositeNode("Main Menu");
+	m_selectionStack.push_back(m_root);
+}
+Menu::~Menu()
+{
+	if(m_root != nullptr)
+	{
+		delete m_root;
+		m_root = nullptr;
+	}
+}
+
+//handles keyboard input for menustate
+void Menu::HandleInput(SDL_Event& e)
+{
+	if(m_selectionStack.empty())
+	{
+		return;
+	}
+	if (e.type == SDL_KEYDOWN)
+	{
+		MenuNode* currSelection = nullptr;
+		MenuNode* currNode = m_selectionStack.back();
+		switch( e.key.keysym.sym ) 
+		{
+			case SDLK_RETURN:
+				currSelection = currNode->GetCurrSelection();
+				if(currSelection != nullptr)
+				{
+					currSelection->Select(this);
+				}
+			break;
+			case SDLK_UP:
+				currNode->SelectPrev();
+			break;
+			case SDLK_DOWN:
+				currNode->SelectNext();
+			break;
+			case SDLK_LEFT:
+			break;
+			case SDLK_RIGHT:
+			break;
+		}
+	}
+
+}
+//adds menu node to root
+void Menu::Add(MenuNode* node)
+{
+	if(node != nullptr)
+	{
+		m_root->Add(node);
+	}
+}
+//removes menu node from root
+//or children if node doesn't exist at top level
+void Menu::Remove(MenuNode* node)
+{
+	if(node != nullptr)
+	{
+		m_root->Remove(node);
+	}
+}
+//sets current node
+void Menu::SetCurrent(MenuNode* node)
+{
+	if(node != nullptr)
+	{
+		//selectionStack traces selection ancestry
+		m_selectionStack.push_back(node);
+	}
+}
+
+//displays current menu subset
+void Menu::Display()
+{
+	if(m_selectionStack.empty())
+	{
+		return;
+	}
+	//if last selected node is not null locally displays it
+	if(m_selectionStack.back() != nullptr)
+	{
+		m_selectionStack.back()->Display();
+	}
+}

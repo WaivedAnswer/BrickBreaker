@@ -1,0 +1,36 @@
+//ActionNode.cpp
+#include "ActionNode.h"
+
+ActionNode::ActionNode(std::string name) : MenuNode(name)
+{
+}
+ActionNode::~ActionNode()
+{
+}
+
+//default behaviours add and remove nothing
+void ActionNode::Add(MenuNode* node)
+{
+}
+void ActionNode::Remove(MenuNode* node)
+{
+}
+
+void ActionNode::Display()
+{
+}
+
+//selects current node
+void ActionNode::Select(Menu* menu)
+{
+}
+
+MenuNode* ActionNode::GetNthChild(int n)
+{
+	return nullptr;
+}
+
+int ActionNode::GetNumChildren()
+{
+	return 0;
+}
