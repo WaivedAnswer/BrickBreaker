@@ -16,6 +16,6 @@ extern SDL_Window* gWindow;
 extern SDL_Renderer* gRenderer;
 
 //Globally used font
-extern TTF_Font *gFont;
+TTF_Font *gFont = NULL;
 
 #endif

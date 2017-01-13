@@ -33,7 +33,6 @@ class Menu
 		//alternative would be to have each node know its parent and
 		//backtrack to parent node
 		std::vector<MenuNode*> m_selectionStack;
-		int m_choice;
 		
 };
 #endif

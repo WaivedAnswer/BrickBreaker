@@ -3,7 +3,8 @@ and may not be redistributed without written permission.*/
 //TODO reformat to be able to use colour struct with draw application, can reuse etc.
 //Using SDL, SDL_image, standard IO, math, and strings
 #include <SDL2/SDL.h>
-//#include <SDL_image.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
 #include <stdio.h>
 #include <string>
 #include <cmath>
@@ -27,6 +28,7 @@ and may not be redistributed without written permission.*/
 
 SDL_Window* gWindow = NULL;
 SDL_Renderer* gRenderer = NULL;
+TTF_Font *gFont = NULL;
 World* WORLD = nullptr;
 //Starts up SDL and creates window
 bool init();
@@ -36,9 +38,6 @@ bool loadMedia();
 
 //Frees media and shuts down SDL
 void close();
-
-//Loads individual image as texture
-//SDL_Texture* loadTexture( std::string path );
 
 
 bool init()
@@ -81,13 +80,20 @@ bool init()
 				//Initialize renderer color
 				SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
 
-				/*//Initialize PNG loading
+				//Initialize PNG loading
 				int imgFlags = IMG_INIT_PNG;
 				if( !( IMG_Init( imgFlags ) & imgFlags ) )
 				{
 					printf( "SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError() );
 					success = false;
-				}*/
+				}
+
+				//Initialize SDL_ttf
+				if( TTF_Init() == -1 )
+				{
+					printf( "SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError() );
+					success = false;
+				}
 			}
 		}
 	}
@@ -100,7 +106,14 @@ bool loadMedia()
 	//Loading success flag
 	bool success = true;
 
-	//Nothing to load
+	//Open the font
+	gFont = TTF_OpenFont( "assets/Roboto-Bold.ttf", 28 );
+	if( gFont == NULL )
+	{
+		printf( "Failed to load lazy font! SDL_ttf Error: %s\n", TTF_GetError() );
+		success = false;
+	}
+
 	return success;
 }
 
@@ -112,8 +125,13 @@ void close()
 	gWindow = NULL;
 	gRenderer = NULL;
 
+	//Free global font
+	TTF_CloseFont( gFont );
+	gFont = NULL;
+
 	//Quit SDL subsystems
-	//IMG_Quit();
+	IMG_Quit();
+	TTF_Quit();
 	SDL_Quit();
 }
 

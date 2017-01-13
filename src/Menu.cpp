@@ -37,6 +37,9 @@ void Menu::HandleInput(SDL_Event& e)
 					currSelection->Select(this);
 				}
 			break;
+			case SDLK_ESCAPE:
+				PopCurrent();
+			break;
 			case SDLK_UP:
 				currNode->SelectPrev();
 			break;
@@ -77,7 +80,17 @@ void Menu::SetCurrent(MenuNode* node)
 		m_selectionStack.push_back(node);
 	}
 }
+//pops current node, sets parent node as current
+void Menu::PopCurrent()
+{
 
+	//selectionStack traces selection ancestry
+	m_selectionStack.pop_back();
+	if(m_selectionStack.empty())
+	{
+		m_selectionStack.push_back(m_root);
+	}
+}
 //displays current menu subset
 void Menu::Display()
 {

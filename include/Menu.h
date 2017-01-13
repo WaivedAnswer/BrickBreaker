@@ -22,7 +22,8 @@ class Menu
 		void Remove(MenuNode* node);
 		//sets current node
 		void SetCurrent(MenuNode* node);
-
+		//pops current node, sets parent node as current
+		void PopCurrent();
 		//displays current menu subset
 		void Display();
 		

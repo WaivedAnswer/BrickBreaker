@@ -23,11 +23,6 @@ void CreateTestMenu(Menu* menu)
 	}
 
 	CompositeNode* play = new ActionNode("Play");
-	if(play != nullptr)
-	{
-		play->Add(new ActionNode("Continue"));
-		play->Add(new ActionNode("New Game"));
-	}
 	menu->Add(play);
 
 	CompositeNode* settings = new CompositeNode("Settings");

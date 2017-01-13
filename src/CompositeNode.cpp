@@ -1,6 +1,8 @@
 //CompositeNode.cpp
 #include "CompositeNode.h"
 #include "SDL2/SDL.h"
+#include <SDL2/SDL_ttf.h>
+#include "LTexture.h"
 #include "common.h"
 #include "commonSDL.h"
 #include <iostream>
@@ -44,19 +46,51 @@ void CompositeNode::Remove(MenuNode* node)
 }
 void CompositeNode::Display()
 {
-	std::cout << this->GetName() << std::endl;
 
+	//Render text
+	SDL_Color currColor = { 0, 0, 255 };
+	SDL_Color textColor = { 255, 255, 255 };
+	SDL_Color selectColor = { 255, 255, 0 };
+	//Rendered texture
+	LTexture gTextTexture;
+	
+	if( !gTextTexture.loadFromRenderedText( this->GetName(), currColor ) )
+	{
+		printf( "Failed to render text texture!\n" );
+		return;
+	}
+	gTextTexture.render( ( SCREEN_WIDTH - gTextTexture.getWidth() ) / 2, 0 );
+
+	int yOffset = static_cast<int>(static_cast<float>(SCREEN_HEIGHT)/4.0);
+	int childCount = GetChildCount();
+	int indexOffset = static_cast<int>(static_cast<float>(SCREEN_HEIGHT)/2.0/childCount);
+	int x = 0;
+	int y = 0;
+	//TODO increase for speed later
+	int index = 0;
+	SDL_Color color = textColor;
 	for(std::list<MenuNode*>::iterator it = m_children.begin(); it != m_children.end(); ++it)
 	{
 		if(it == m_selectedChild)
 		{
 			std::cout << "\t" << (*it)->GetName() << "*\n";
+			color = selectColor;
 		}
 		else
 		{
 			std::cout << "\t" << (*it)->GetName() << std::endl;
+			color = textColor;
 		}
-		
+
+		if( !gTextTexture.loadFromRenderedText( (*it)->GetName(), color ) )
+		{
+			printf( "Failed to render text texture!\n" );
+			return;
+		}
+		x = ( SCREEN_WIDTH - gTextTexture.getWidth() ) / 2;
+		y = yOffset + indexOffset*index;
+		gTextTexture.render( x, y);
+		index++;
 	}
 }
 //sets current menu node as current selection in menu
