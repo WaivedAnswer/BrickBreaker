@@ -8,6 +8,7 @@
 #include "RectCollider.h"
 #include "Collider.h"
 #include "CircleCollider.h"
+#include <algorithm>
 
 Actor::Actor()
 {
@@ -15,7 +16,7 @@ Actor::Actor()
 	m_dimensions[0] = 6.0;
 	m_dimensions[1] = 2.5;
 	m_body = new PhysicsBody(new RectCollider(Point(0.0,0.0), m_dimensions[0], m_dimensions[1]), Vector(0.0,0.0), Point((GRID_RATIO - m_dimensions[0])/2.0, GRID_RATIO*0.85), false);
-	m_speed = 0.2;
+	m_speed = DEFAULT_ACTOR_SPEED;
 	/*m_dimensions[0] = 10.0;
 	m_dimensions[1] = 5.0;
 	m_position[0] = static_cast<float>(GRID_RATIO)/2.0 - m_dimensions[0]/2.0;
@@ -70,6 +71,7 @@ void Actor::Update(World* world, double lastClock)
 	}
 }
 
+//TODO pull out drawing stuff later
 void Actor::Draw()
 {
 	//Render red filled quad

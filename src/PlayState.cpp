@@ -3,6 +3,7 @@
 #include <SDL2/SDL.h>
 #include "commonSDL.h"
 #include <ctime>
+#include "LTexture.h"
 PlayState::PlayState()
 {
 	m_running = false;
@@ -100,6 +101,26 @@ void PlayState::Draw(GameEngine* game)
 	if(m_world != nullptr)
 	{
 		m_world->Draw();
+	}
+	if(m_player != nullptr)
+	{
+		//Rendered texture
+		LTexture scoreTexture;
+		LTexture livesTexture;
+		SDL_Color color = { 255, 255, 255 };
+		if( !scoreTexture.loadFromRenderedText( "SCORE: " + std::to_string(m_player->GetScore()), color ) )
+		{
+			printf( "Failed to render text texture!\n" );
+			return;
+		}
+		scoreTexture.render( ( SCREEN_WIDTH - scoreTexture.getWidth() ) , static_cast<float>(SCREEN_HEIGHT)/4.0 );
+
+		if( !livesTexture.loadFromRenderedText( "LIVES: " + std::to_string(m_player->GetLives()), color ) )
+		{
+			printf( "Failed to render text texture!\n" );
+			return;
+		}
+		livesTexture.render( ( SCREEN_WIDTH - livesTexture.getWidth() ), static_cast<float>(SCREEN_HEIGHT)*3.0/4.0 );
 	}
 	//Update screen
 	SDL_RenderPresent( gRenderer );

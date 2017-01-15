@@ -8,6 +8,7 @@
 #include "RectCollider.h"
 #include "Collider.h"
 #include "CircleCollider.h"
+#include <algorithm>
 
 Actor::Actor()
 {
@@ -70,17 +71,19 @@ void Actor::Update(World* world, double lastClock)
 	}
 }
 
+//TODO pull out drawing stuff later
 void Actor::Draw()
 {
 	//Render red filled quad
 	float dimensions[COORDNUM];
 	m_body->GetDimensions(dimensions);
 	Point centre = m_body->GetPosition();
+	int minScreenDim = std::min(SCREEN_WIDTH, SCREEN_HEIGHT);
 	SDL_Rect fillRect = { 
-	static_cast<int>(SCREEN_WIDTH / GRID_RATIO * (centre[0] -dimensions[0])),
-  	static_cast<int>(SCREEN_HEIGHT / GRID_RATIO * (centre[1] -dimensions[1])),  	
-	static_cast<int>(SCREEN_WIDTH / GRID_RATIO * 2*dimensions[0]),  		
-	static_cast<int>(SCREEN_HEIGHT / GRID_RATIO * 2*dimensions[1]) };
+	static_cast<int>(minScreenDim / GRID_RATIO * (centre[0] -dimensions[0])),
+  	static_cast<int>(minScreenDim / GRID_RATIO * (centre[1] -dimensions[1])),  	
+	static_cast<int>(minScreenDim / GRID_RATIO * 2*dimensions[0]),  		
+	static_cast<int>(minScreenDim / GRID_RATIO * 2*dimensions[1]) };
 
 	SDL_SetRenderDrawColor( gRenderer, 0xFF, 0x00, 0x00, 0xFF );
 	SDL_RenderFillRect( gRenderer, &fillRect );

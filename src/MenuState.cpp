@@ -5,6 +5,7 @@
 #include "commonSDL.h"
 #include "CompositeNode.h"
 #include "ActionNode.h"
+#include "NewGameCommand.h"
 MenuState::MenuState()
 {
 	m_running = false;
@@ -23,6 +24,7 @@ void CreateTestMenu(Menu* menu)
 	}
 
 	ActionNode* play = new ActionNode("Play");
+	play->SetAction(new NewGameCommand());
 	menu->Add(play);
 
 	CompositeNode* settings = new CompositeNode("Settings");

@@ -1,5 +1,8 @@
 /*This source code copyrighted by Lazy Foo' Productions (2004-2015)
 and may not be redistributed without written permission.*/
+//TODO create window class to draw to
+//TODO create graphics components
+//TODO create audio components
 //TODO reformat to be able to use colour struct with draw application, can reuse etc.
 //Using SDL, SDL_image, standard IO, math, and strings
 #include <SDL2/SDL.h>
@@ -235,7 +238,7 @@ int main( int argc, char* args[] )
 	std::clock_t fbegin, fend;
 	std::clock_t lastClock;
 	double ftime = 0.0;
-	GameEngine* game = new GameEngine();
+	GameEngine* game = GameEngine::Instance();
 	game->PushState(new MenuState());
 	/*WORLD = new World();
 	WORLD->CreateWorld();

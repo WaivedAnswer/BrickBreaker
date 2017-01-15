@@ -37,8 +37,6 @@ void World::Draw()
 
 void World::Add(GameObject* object)
 {
-	std::cout << this <<std::endl;
-	std::cout << std::flush;
 	if(object != nullptr)
 	{
 		m_objList.push_back(object);
@@ -87,10 +85,10 @@ void World::CreateWorld()
 {
 	//m_objList.push_back(new Actor());
 
-	m_objList.push_back(new StandardWall(GRID_RATIO, GRID_RATIO/20.0, GRID_RATIO/2.0, 0.0));
-	m_objList.push_back(new DeathWall(GRID_RATIO, GRID_RATIO/20.0, GRID_RATIO/2.0, GRID_RATIO+GRID_RATIO/20.0));
-	m_objList.push_back(new StandardWall(GRID_RATIO/20.0, GRID_RATIO, 0.0, GRID_RATIO/2.0));
-	m_objList.push_back(new StandardWall(GRID_RATIO/20.0, GRID_RATIO, GRID_RATIO, GRID_RATIO/2.0));
+	m_objList.push_back(new StandardWall(GRID_RATIO/2.0, GRID_RATIO/20.0, GRID_RATIO/2.0, 0.0));
+	m_objList.push_back(new DeathWall(GRID_RATIO/2.0, GRID_RATIO/20.0, GRID_RATIO/2.0, GRID_RATIO+GRID_RATIO/20.0));
+	m_objList.push_back(new StandardWall(GRID_RATIO/20.0, GRID_RATIO/2.0, GRID_RATIO/20.0, GRID_RATIO/2.0));
+	m_objList.push_back(new StandardWall(GRID_RATIO/20.0, GRID_RATIO/2.0, GRID_RATIO*19.0/20.0, GRID_RATIO/2.0));
 
 	InitializeBrickList(m_objList);
 }

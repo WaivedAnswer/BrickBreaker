@@ -54,7 +54,7 @@ void CompositeNode::Display()
 	//Rendered texture
 	LTexture gTextTexture;
 	
-	if( !gTextTexture.loadFromRenderedText( this->GetName(), textColor ) )
+	if( !gTextTexture.loadFromRenderedText( this->GetName(), currColor ) )
 	{
 		printf( "Failed to render text texture!\n" );
 		return;

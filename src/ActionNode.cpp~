@@ -3,17 +3,27 @@
 
 ActionNode::ActionNode(std::string name) : MenuNode(name)
 {
+	m_command = &m_nullCommand;
 }
 ActionNode::~ActionNode()
 {
+	if(m_command != nullptr && m_command != &m_nullCommand)
+	{
+		delete m_command;
+		m_command = nullptr;
+	}
 }
 
-//default behaviours add and remove nothing
-void ActionNode::Add(MenuNode* node)
+void ActionNode::SetAction(Command* command)
 {
-}
-void ActionNode::Remove(MenuNode* node)
-{
+	if(command != nullptr)
+	{
+		m_command = command;
+	}
+	else
+	{
+		m_command = &m_nullCommand;
+	}
 }
 
 void ActionNode::Display()
@@ -23,14 +33,5 @@ void ActionNode::Display()
 //selects current node
 void ActionNode::Select(Menu* menu)
 {
-}
-
-MenuNode* ActionNode::GetNthChild(int n)
-{
-	return nullptr;
-}
-
-int ActionNode::GetNumChildren()
-{
-	return 0;
+	m_command->Execute();
 }

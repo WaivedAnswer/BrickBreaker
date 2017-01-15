@@ -1,0 +1,12 @@
+//NullCommand.h
+#ifndef _NULL_COMMAND_H
+#define _NULL_COMMAND_H
+#include "Command.h"
+class NullCommand : public Command
+{
+	public:
+		NullCommand() {};
+		~NullCommand() {};
+		virtual void Execute() {};
+};
+#endif

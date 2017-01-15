@@ -8,14 +8,17 @@ class GameState;
 class GameEngine
 {
 	public:
-		GameEngine();
+		static GameEngine* Instance();
 		~GameEngine();
+
 		void Init();
 		void Cleanup();
 		
 		void ChangeState(GameState* state);
 		void PushState(GameState* state);
 		void PopState();
+		GameState* GetCurrState();
+		
 
 		void HandleInput();
 		void Update();
@@ -30,9 +33,12 @@ class GameEngine
 		{
 			m_running = false;
 		}
-	
+
+	protected:
+		GameEngine();
 	private:
 		//stack of states
+		static GameEngine* m_instance;
 		std::vector<GameState*> states;
 		bool m_running;
 };

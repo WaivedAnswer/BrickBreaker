@@ -22,7 +22,7 @@ void CreateTestMenu(Menu* menu)
 		menu = new Menu();
 	}
 
-	CompositeNode* play = new ActionNode("Play");
+	ActionNode* play = new ActionNode("Play");
 	menu->Add(play);
 
 	CompositeNode* settings = new CompositeNode("Settings");

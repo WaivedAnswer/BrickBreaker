@@ -2,6 +2,17 @@
 #include "GameEngine.h"
 #include "GameState.h"
 
+GameEngine* GameEngine::m_instance = nullptr;
+
+GameEngine* GameEngine::Instance() 
+{
+	if(m_instance == nullptr)
+	{
+		m_instance = new GameEngine();
+	}
+
+	return m_instance;
+}
 GameEngine::GameEngine()
 {
 	m_running = false;
@@ -57,6 +68,16 @@ void GameEngine::PopState()
 		}
 	}
 	
+}
+
+GameState* GameEngine::GetCurrState()
+{
+	if(!states.empty())
+	{
+		return states.back();
+	}
+	
+	return nullptr;
 }
 
 void GameEngine::HandleInput()

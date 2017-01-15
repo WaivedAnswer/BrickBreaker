@@ -12,7 +12,7 @@ Brick::Brick()
 	m_dimensions[1] = 10;
 	m_position[0] = 0;
 	m_position[1] = 0;*/
-	m_pointVal = 5;
+	m_pointVal = 10;
 	m_health = 2;
 }
 Brick::Brick(float hwidth, float hheight, float x, float y, int pointVal)

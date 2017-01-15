@@ -73,12 +73,10 @@ void CompositeNode::Display()
 	{
 		if(it == m_selectedChild)
 		{
-			std::cout << "\t" << (*it)->GetName() << "*\n";
 			color = selectColor;
 		}
 		else
 		{
-			std::cout << "\t" << (*it)->GetName() << std::endl;
 			color = textColor;
 		}
 

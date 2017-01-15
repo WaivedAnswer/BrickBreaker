@@ -3,10 +3,10 @@ INC_DIR = include
 SRC_DIR = src
 OBJ_DIR = bin
 CFLAGS = -std=c++11 -I $(INC_DIR)
-LFLAGS = -lSDL2 -lSDL2_ttf
+LFLAGS = -lSDL2 -lSDL2_ttf -lSDL2_image
 
 
-_DEPS = GameObject.h Actor.h common.h commonSDL.h Ball.h Wall.h StandardWall.h DeathWall.h Brick.h ObjectVisitor.h Collider.h RectCollider.h CircleCollider.h PhysicsBody.h World.h Player.h BrickRemover.h GameEngine.h GameState.h PlayState.h MenuState.h Menu.h MenuNode.h CompositeNode.h ActionNode.h LTexture.h
+_DEPS = GameObject.h Actor.h common.h commonSDL.h Ball.h Wall.h StandardWall.h DeathWall.h Brick.h ObjectVisitor.h Collider.h RectCollider.h CircleCollider.h PhysicsBody.h World.h Player.h BrickRemover.h GameEngine.h GameState.h PlayState.h MenuState.h Menu.h MenuNode.h CompositeNode.h ActionNode.h LTexture.h Command.h NullCommand.h
 
 DEPS = $(patsubst %, $(INC_DIR)/%, $(_DEPS))
 
