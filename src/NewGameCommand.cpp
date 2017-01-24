@@ -2,7 +2,7 @@
 #include "NewGameCommand.h"
 #include "GameEngine.h"
 #include "GameState.h"
-#include "PlayState.h"
+#include "ReadyState.h"
 
 NewGameCommand::NewGameCommand()
 {
@@ -22,6 +22,6 @@ void NewGameCommand::Execute()
 	{
 		return;
 	}
-	currState->ChangeState(game, new PlayState());
+	currState->ChangeState(game, new ReadyState());
 }
 
