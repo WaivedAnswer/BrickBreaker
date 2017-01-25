@@ -235,7 +235,7 @@ void InitializeBrickList(std::list<Brick*> &brickList)
 
 int main( int argc, char* args[] )
 {
-	double frameTime = 50;
+	double frameTime = 20;
 	std::clock_t fbegin, fend;
 	std::clock_t lastClock;
 	double ftime = 0.0;
@@ -273,18 +273,7 @@ int main( int argc, char* args[] )
 				std::cout <<"Error, Error";
 				return -1;
 			}
-			PlayState* play = PlayState::Instance();
-			if(play == nullptr)
-			{
-				std::cout <<"Error, Error";
-				return -1;
-			}
-			ReadyState* ready = ReadyState::Instance();
-			if(ready == nullptr)
-			{
-				std::cout <<"Error, Error";
-				return -1;
-			}
+
 			MenuState* menu = MenuState::Instance();
 			if(menu == nullptr)
 			{
@@ -292,30 +281,20 @@ int main( int argc, char* args[] )
 				return -1;
 			}
 			game->PushState(menu);
-			//Event handler
-			SDL_Event e;
-			Directions moveDirection = NONE;
-			lastClock = clock();
+
 			//While application is running
 			while( game->Running() )
 			{
 				
 				fbegin = clock();
-				moveDirection = NONE;
-				
 				
 				game->HandleInput();
 		
 				game->Update();
-
-				lastClock = clock();
-
 		
 				game->Draw();
-				
 
-				fend = clock();
-				ftime = static_cast<double>(fend - fbegin);
+				ftime = GetTime(fbegin);
 				if(ftime < frameTime)
 				{
 					

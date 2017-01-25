@@ -36,6 +36,8 @@ class PlayState : public GameState
 		Player* m_player;
 		Ball* m_ball;
 		double m_lastClock;
+		//used for timed pauses;
+		double m_pauseTimer;
 		bool m_running;
 };
 #endif

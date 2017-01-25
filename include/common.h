@@ -11,8 +11,12 @@ extern World* WORLD;
 
 const int COORDNUM = 2;
 
-const float DEFAULT_BALL_SPEED = 0.1;
-const float DEFAULT_ACTOR_SPEED = 0.1;
+const float DEFAULT_BALL_SPEED = 750;
+const float DEFAULT_ACTOR_SPEED = 750;
+
+const float DEFAULT_BALL_ANGLE = -M_PI/2.0;
+
+const double PREPLAY_PAUSE = 50; //ms
 
 
 enum Directions
@@ -91,7 +95,7 @@ struct Point
 	bool operator ==(const Point& other) const;
 };
 
-//gets time between last time and current
+//gets time in milliseconds between last time and current
 double GetTime(double lastTime);
 
 const Point DEFAULT_ACTOR_POS = Point((GRID_RATIO)/2.0, GRID_RATIO*0.85);

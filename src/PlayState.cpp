@@ -7,6 +7,7 @@
 #include "ReadyState.h"
 #include "GameEngine.h"
 #include "MenuState.h"
+#include <limits>
 
 PlayState* PlayState::m_instance = nullptr;
 
@@ -25,6 +26,9 @@ PlayState::PlayState()
 	m_world = nullptr;
 	m_bRemover = nullptr;
 	m_player = nullptr;
+	m_ball = nullptr;
+	m_lastClock = 0;
+	m_pauseTimer = 0;
 	
 }
 PlayState::~PlayState()
@@ -34,7 +38,7 @@ PlayState::~PlayState()
 void PlayState::Init()
 {
 	Cleanup();
-	m_running = true;
+	m_running = false;
 	m_world = new World();
 	if(m_world == nullptr)
 	{
@@ -59,7 +63,6 @@ void PlayState::Init()
 		m_world->Add(m_ball);
 	}
 
-	m_lastClock = clock();
 	GameEngine* game = GameEngine::Instance();
 	if(game == nullptr)
 	{
@@ -67,6 +70,8 @@ void PlayState::Init()
 		return;
 	}
 	game->PushState(ReadyState::Instance());
+	m_pauseTimer = PREPLAY_PAUSE;
+	m_lastClock = clock();
 }
 void PlayState::Cleanup()
 {
@@ -91,11 +96,14 @@ void PlayState::Cleanup()
 
 void PlayState::Pause()
 {
+	m_pauseTimer = std::numeric_limits<double>::max();
 	m_running = false;
 }
 void PlayState::Resume()
 {
-	m_running = true;
+	//m_running = true;
+	m_lastClock = clock();
+	m_pauseTimer = PREPLAY_PAUSE;
 }
 
 void PlayState::Update(GameEngine* game)
@@ -107,12 +115,26 @@ void PlayState::Update(GameEngine* game)
 		if(m_world != nullptr)
 		{
 			m_world->Update(m_lastClock);
-			m_lastClock = clock();
+			m_lastClock = static_cast<double>(clock());
 		}
 		if(m_bRemover != nullptr)
 		{
 			m_bRemover->RemoveBricks();
 		}
+	}
+	else
+	{
+		m_pauseTimer -= GetTime(m_lastClock);
+		std::cout << m_pauseTimer << std::endl;
+		//just clock to keep time
+		m_lastClock = static_cast<double>(clock());
+		if(m_pauseTimer <= 0)
+		{
+			std::cout << "running!";
+			m_running = true;
+		}
+
+		
 	}
 
 }
@@ -167,13 +189,18 @@ void PlayState::HandleInput(GameEngine* game)
 
 void PlayState::ResetStartPositions()
 {
+	m_pauseTimer = PREPLAY_PAUSE;
+	m_running = false;
 	if(m_ball != nullptr)
 	{
 		PhysicsBody* ballBody = m_ball->GetPhysicsBody();
 		if(ballBody != nullptr)
 		{
 			ballBody->SetPosition(DEFAULT_BALL_POS);
+			ballBody->SetVelocity(DEFAULT_BALL_SPEED * Vector(cos(DEFAULT_BALL_ANGLE),-sin(DEFAULT_BALL_ANGLE)));
 		}
+		
+		
 	}
 	if(m_player != nullptr)
 	{

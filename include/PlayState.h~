@@ -34,7 +34,7 @@ class PlayState : public GameState
 		World* m_world;
 		BrickRemover* m_bRemover;
 		Player* m_player;
-		Ball* ball;
+		Ball* m_ball;
 		double m_lastClock;
 		bool m_running;
 };

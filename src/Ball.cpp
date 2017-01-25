@@ -13,7 +13,7 @@
 Ball::Ball()
 {
 	m_speed = DEFAULT_BALL_SPEED;
-	m_angle = -M_PI/2.0;
+	m_angle = DEFAULT_BALL_ANGLE;
 	m_dimensions[0] = 2.5;
 	m_dimensions[1] = 2.5;
 	m_body = m_body = new PhysicsBody(new CircleCollider(Point(0.0,0.0), m_dimensions[0]), m_speed * Vector(cos(m_angle),-sin(m_angle)), DEFAULT_BALL_POS, true);
@@ -26,6 +26,7 @@ Ball::Ball()
 	m_canMove = true;
 }
 
+//TODO shift this to work with defaults and physics body
 Ball::Ball(float startSpeed, float startAngle)
 {
 	m_speed = startSpeed;
