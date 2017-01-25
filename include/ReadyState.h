@@ -9,7 +9,8 @@
 class ReadyState : public GameState
 {
 	public:
-		ReadyState();
+		//singleton
+		static ReadyState* Instance();
 		~ReadyState();
 
 		virtual void Init();
@@ -26,6 +27,8 @@ class ReadyState : public GameState
 		//void ChangeState(GameEngine* game, GameState* state) 
 
 	private:
+		ReadyState();
+		static ReadyState* m_instance;
 		LTexture* m_readyText;
 
 };

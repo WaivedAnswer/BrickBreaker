@@ -70,6 +70,16 @@ void GameEngine::PopState()
 	
 }
 
+GameState* GameEngine::GetCurrState()
+{
+	if(!states.empty())
+	{
+		return states.back();
+	}
+	
+	return nullptr;
+}
+
 void GameEngine::HandleInput()
 {
 	if(!states.empty())

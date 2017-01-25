@@ -3,15 +3,17 @@
 #define _COMMON_H
 //non SDL related
 #include <iostream>
-
+#include "commonSDL.h"
 class World;
 
+struct Point;
 extern World* WORLD;
 
 const int COORDNUM = 2;
 
 const float DEFAULT_BALL_SPEED = 0.1;
 const float DEFAULT_ACTOR_SPEED = 0.1;
+
 
 enum Directions
 {
@@ -91,5 +93,8 @@ struct Point
 
 //gets time between last time and current
 double GetTime(double lastTime);
+
+const Point DEFAULT_ACTOR_POS = Point((GRID_RATIO)/2.0, GRID_RATIO*0.85);
+const Point DEFAULT_BALL_POS = Point((GRID_RATIO)/2.0, GRID_RATIO*0.65);
 
 #endif

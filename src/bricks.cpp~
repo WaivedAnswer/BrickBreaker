@@ -1,7 +1,7 @@
 /*This source code copyrighted by Lazy Foo' Productions (2004-2015)
 and may not be redistributed without written permission.*/
 //TODO create window class to draw to
-//TODO create graphics component 
+//TODO create graphics components
 //TODO create audio components
 //TODO reformat to be able to use colour struct with draw application, can reuse etc.
 //Using SDL, SDL_image, standard IO, math, and strings
@@ -24,6 +24,7 @@ and may not be redistributed without written permission.*/
 #include "BrickRemover.h"
 #include "PlayState.h"
 #include "MenuState.h"
+#include "ReadyState.h"
 #include "GameEngine.h"
 #include <iostream>
 #include <list>
@@ -238,8 +239,6 @@ int main( int argc, char* args[] )
 	std::clock_t fbegin, fend;
 	std::clock_t lastClock;
 	double ftime = 0.0;
-	GameEngine* game = GameEngine::Instance();
-	game->PushState(new MenuState());
 	/*WORLD = new World();
 	WORLD->CreateWorld();
 	BrickRemover* bRemover = new BrickRemover(WORLD);
@@ -268,7 +267,31 @@ int main( int argc, char* args[] )
 		{	
 			//Main loop flag
 			bool quit = false;
-
+			GameEngine* game = GameEngine::Instance();
+			if(game == nullptr)
+			{
+				std::cout <<"Error, Error";
+				return -1;
+			}
+			PlayState* play = PlayState::Instance();
+			if(play == nullptr)
+			{
+				std::cout <<"Error, Error";
+				return -1;
+			}
+			ReadyState* ready = ReadyState::Instance();
+			if(ready == nullptr)
+			{
+				std::cout <<"Error, Error";
+				return -1;
+			}
+			MenuState* menu = MenuState::Instance();
+			if(menu == nullptr)
+			{
+				std::cout << "Error, Error";
+				return -1;
+			}
+			game->PushState(menu);
 			//Event handler
 			SDL_Event e;
 			Directions moveDirection = NONE;
@@ -300,9 +323,10 @@ int main( int argc, char* args[] )
 				}
 
 			}
+			delete game;
 		}
 	}
-	delete game;
+	
 	//Free resources and close SDL
 	close();
 	//delete actor;

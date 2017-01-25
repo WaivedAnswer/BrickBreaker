@@ -31,7 +31,6 @@ class GameObject
 		void SetPhysicsBody(PhysicsBody* body) {m_body = body;};
 		PhysicsBody* GetPhysicsBody() {return m_body;};
 		//todo overwrite to get things from physics bodies
-		//USELESS
 		float* const GetDimensions() {return m_dimensions;};
 		void SetDimensions(float dimensions[2]) 
 		{

@@ -4,11 +4,11 @@
 #include "GameState.h"
 #include "Menu.h"
 
-//TODO create singleton
 class MenuState : public GameState
 {
 	public:	
-		MenuState();
+		//singleton
+		static MenuState* Instance();
 		~MenuState();
 		virtual void Init();
 		virtual void Cleanup();
@@ -26,6 +26,8 @@ class MenuState : public GameState
    			game->ChangeState(state);
   		}*/
 	private:
+		MenuState();
+		static MenuState* m_instance;
 		bool m_running;
 		Menu* m_menu;
 };

@@ -3,8 +3,22 @@
 #include "PlayState.h"
 #include "commonSDL.h"
 #include "common.h"
+
+ReadyState* ReadyState::m_instance = nullptr;
+
+ReadyState* ReadyState::Instance()
+{
+	if(m_instance == nullptr)
+	{
+		m_instance = new ReadyState();
+	}
+	return m_instance;
+}
+
 ReadyState::ReadyState()
 {
+	m_readyText = nullptr;
+
 }
 
 ReadyState::~ReadyState()
@@ -16,6 +30,7 @@ void ReadyState::Init()
 	if(m_readyText == nullptr)
 	{
 		m_readyText = new LTexture();
+		std::cout << "New Ready Text";
 	}
 	SDL_Color color = { 255, 255, 255 };
 	if( !m_readyText->loadFromRenderedText( "Press Enter to Start!", color ))
@@ -28,6 +43,7 @@ void ReadyState::Cleanup()
 {
 	if(m_readyText != nullptr)
 	{
+		std::cout << "Remove ready Text";
 		delete m_readyText;
 		m_readyText == nullptr;
 	}
@@ -74,7 +90,8 @@ void ReadyState::HandleInput(GameEngine* game)
 			switch( e.key.keysym.sym ) 
 			{
 				case SDLK_RETURN:
-					ChangeState(game, new PlayState());
+					//should have playstate underneath.
+					game->PopState();
 					break;
 			}
 		}

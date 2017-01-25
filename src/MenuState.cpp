@@ -6,6 +6,18 @@
 #include "CompositeNode.h"
 #include "ActionNode.h"
 #include "NewGameCommand.h"
+
+MenuState* MenuState::m_instance = nullptr;
+
+MenuState* MenuState::Instance()
+{
+	if(m_instance == nullptr)
+	{
+		m_instance = new MenuState();
+	}
+	return m_instance;
+}
+
 MenuState::MenuState()
 {
 	m_running = false;

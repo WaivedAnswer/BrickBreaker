@@ -9,7 +9,8 @@
 class PlayState : public GameState
 {
 	public:	
-		PlayState();
+		//singleton
+		static PlayState* Instance();
 		~PlayState();
 		virtual void Init();
 		virtual void Cleanup();
@@ -20,16 +21,20 @@ class PlayState : public GameState
 		virtual void Update(GameEngine* game);
 		virtual void Draw(GameEngine* game);
 		virtual void HandleInput(GameEngine* game);
-
+		
+		void ResetStartPositions();
 		/*// inherited
 		void ChangeState(GameEngine* game, GameState* state) 
 		{
    			game->ChangeState(state);
   		}*/
 	private:
+		PlayState();
+		static PlayState* m_instance;
 		World* m_world;
 		BrickRemover* m_bRemover;
 		Player* m_player;
+		Ball* m_ball;
 		double m_lastClock;
 		bool m_running;
 };

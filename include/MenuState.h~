@@ -27,6 +27,6 @@ class MenuState : public GameState
   		}*/
 	private:
 		bool m_running;
-		M
+		Menu* m_menu;
 };
 #endif

@@ -4,6 +4,21 @@
 #include "commonSDL.h"
 #include <ctime>
 #include "LTexture.h"
+#include "ReadyState.h"
+#include "GameEngine.h"
+#include "MenuState.h"
+
+PlayState* PlayState::m_instance = nullptr;
+
+PlayState* PlayState::Instance()
+{
+	if(m_instance == nullptr)
+	{
+		m_instance = new PlayState();
+	}
+	return m_instance;
+}
+
 PlayState::PlayState()
 {
 	m_running = false;
@@ -37,14 +52,21 @@ void PlayState::Init()
 		m_world->Add(actor);
 	}
 
-	Ball* ball = new Ball();
-	if(ball != nullptr)
+	m_ball = new Ball();
+	if(m_ball != nullptr)
 	{
-		ball->SetPlayer(m_player);
-		m_world->Add(ball);
+		m_ball->SetPlayer(m_player);
+		m_world->Add(m_ball);
 	}
 
 	m_lastClock = clock();
+	GameEngine* game = GameEngine::Instance();
+	if(game == nullptr)
+	{
+		std::cout << "Error, Error";
+		return;
+	}
+	game->PushState(ReadyState::Instance());
 }
 void PlayState::Cleanup()
 {
@@ -139,6 +161,30 @@ void PlayState::HandleInput(GameEngine* game)
 		if(m_player != nullptr)
 		{
 			m_player->HandleInput(e);
+		}
+	}
+}
+
+void PlayState::ResetStartPositions()
+{
+	if(m_ball != nullptr)
+	{
+		PhysicsBody* ballBody = m_ball->GetPhysicsBody();
+		if(ballBody != nullptr)
+		{
+			ballBody->SetPosition(DEFAULT_BALL_POS);
+		}
+	}
+	if(m_player != nullptr)
+	{
+		Actor* actor = m_player->GetActor();
+		if(actor != nullptr)
+		{
+			PhysicsBody* actorBody = actor->GetPhysicsBody();
+			if(actorBody != nullptr)
+			{
+				actorBody->SetPosition(DEFAULT_ACTOR_POS);
+			}
 		}
 	}
 }

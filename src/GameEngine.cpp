@@ -59,7 +59,6 @@ void GameEngine::PopState()
 	if(!states.empty())
 	{
 		states.back()->Cleanup();
-		delete states.back();
 		states.pop_back();
 
 		if(!states.empty())

@@ -141,6 +141,7 @@ void Ball::Interact(GameObject* other)
 //not sure if needed just now?
 void Ball::InteractBrick(Brick* brick)
 {
+	std::cout << "Here. " <<std::endl;
 	brick->HitBrick();
 	if(m_player == nullptr)
 	{
