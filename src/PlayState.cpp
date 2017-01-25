@@ -7,6 +7,7 @@
 #include "ReadyState.h"
 #include "GameEngine.h"
 #include "MenuState.h"
+#include "GameOverState.h"
 #include <limits>
 
 PlayState* PlayState::m_instance = nullptr;
@@ -121,16 +122,21 @@ void PlayState::Update(GameEngine* game)
 		{
 			m_bRemover->RemoveBricks();
 		}
+		if(m_player != nullptr)
+		{
+			if(m_player->GetLives() <=0)
+			{
+				game->ChangeState(GameOverState::Instance());
+			}
+		}
 	}
 	else
 	{
 		m_pauseTimer -= GetTime(m_lastClock);
-		std::cout << m_pauseTimer << std::endl;
 		//just clock to keep time
 		m_lastClock = static_cast<double>(clock());
 		if(m_pauseTimer <= 0)
 		{
-			std::cout << "running!";
 			m_running = true;
 		}
 

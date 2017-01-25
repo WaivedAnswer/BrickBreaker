@@ -3,9 +3,8 @@
 #define _READY_STATE_H
 #include "GameState.h"
 #include "LTexture.h"
-#include "World.h"
 
-//State to be used at start of new game and after life has been lost, should reset player and ball position but maintain world
+//State to be used at start of new game
 class ReadyState : public GameState
 {
 	public:

@@ -30,7 +30,6 @@ void ReadyState::Init()
 	if(m_readyText == nullptr)
 	{
 		m_readyText = new LTexture();
-		std::cout << "New Ready Text";
 	}
 	SDL_Color color = { 255, 255, 255 };
 	if( !m_readyText->loadFromRenderedText( "Press Enter to Start!", color ))
@@ -43,7 +42,6 @@ void ReadyState::Cleanup()
 {
 	if(m_readyText != nullptr)
 	{
-		std::cout << "Remove ready Text";
 		delete m_readyText;
 		m_readyText == nullptr;
 	}

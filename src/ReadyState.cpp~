@@ -43,6 +43,7 @@ void ReadyState::Cleanup()
 {
 	if(m_readyText != nullptr)
 	{
+		std::cout << "Remove ready Text";
 		delete m_readyText;
 		m_readyText == nullptr;
 	}
