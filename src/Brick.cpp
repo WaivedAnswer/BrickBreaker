@@ -36,13 +36,13 @@ Brick::Brick(float hwidth, float hheight, float x, float y, int pointVal)
 	m_brick = new LTexture();
 	m_brokenBrick = new LTexture();
 	int minScreenDim = std::min(SCREEN_WIDTH, SCREEN_HEIGHT);
-	if(m_brick && !m_brick->loadFromFile("assets/brick.png"))
+	if(m_brick && !m_brick->loadFromFile("assets/brick2.png"))
 	{
 		std::cerr << "Could not load brick texture.\n";
 	}
 	m_brick->setWidth(minScreenDim / GRID_RATIO * hwidth*2.0);
 	m_brick->setHeight(minScreenDim / GRID_RATIO * hheight*2.0);
-	if(m_brokenBrick && !m_brokenBrick->loadFromFile("assets/brokenbrick.png"))
+	if(m_brokenBrick && !m_brokenBrick->loadFromFile("assets/brokenbrick2.png"))
 	{
 		std::cerr << "Could not load broken brick texture.\n";
 	}
