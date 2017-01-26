@@ -158,7 +158,7 @@ void PlayState::Draw(GameEngine* game)
 		LTexture scoreTexture;
 		LTexture livesTexture;
 		SDL_Color color = { 255, 255, 255 };
-		if( !scoreTexture.loadFromRenderedText( "SCORE: " + std::to_string(m_player->GetScore()), color ) )
+		if( !scoreTexture.loadFromRenderedText( "SCORE:" + std::to_string(m_player->GetScore()), color ) )
 		{
 			printf( "Failed to render text texture!\n" );
 			return;
@@ -185,6 +185,23 @@ void PlayState::HandleInput(GameEngine* game)
 		if( e.type == SDL_QUIT )
 		{
 			game->Quit();
+		}
+		else if(e.type == SDL_KEYDOWN)
+		{
+			switch( e.key.keysym.sym ) 
+			{ 
+				case SDLK_p:
+					if(m_running)
+					{
+						Pause();
+					}
+					else
+					{
+						Resume();
+					}
+					
+					break;
+			}
 		}
 		if(m_player != nullptr)
 		{
