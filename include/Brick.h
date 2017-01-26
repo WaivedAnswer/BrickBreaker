@@ -2,6 +2,7 @@
 #ifndef _BRICK_H
 #define _BRICK_H
 #include "GameObject.h"
+#include "LTexture.h"
 class Brick : public GameObject
 {
 	public:
@@ -25,6 +26,8 @@ class Brick : public GameObject
 		//PhysicsBody* m_body; //inherited from base
 		int m_pointVal;
 		int m_health;
+		LTexture* m_brick;
+		LTexture* m_brokenBrick;
 		
 };
 #endif

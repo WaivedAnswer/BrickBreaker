@@ -4,6 +4,7 @@
 #include "GameObject.h"
 #include "common.h"
 #include "Player.h"
+#include "LTexture.h"
 //TODO maybe make the visitor/interactor separate from ball, just get reference to ball and interact items with it
 
 class Ball : public GameObject
@@ -38,6 +39,7 @@ class Ball : public GameObject
 		float m_angle;
 		Player* m_player;
 		GameObject* lastCollision;
+		LTexture* m_ball;
 };
 
 #endif

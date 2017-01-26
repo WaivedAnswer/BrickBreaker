@@ -8,6 +8,21 @@
 Brick::Brick()
 {
 	m_body = new PhysicsBody(new RectCollider(Point(0.0,0.0), 5, 5), Vector(0.0,0.0), Point(0, 0), false);
+	m_brick = new LTexture();
+	m_brokenBrick = new LTexture();
+	int minScreenDim = std::min(SCREEN_WIDTH, SCREEN_HEIGHT);
+	if(m_brick && !m_brick->loadFromFile("assets/brick.png"))
+	{
+		std::cerr << "Could not load brick texture.\n";
+	}
+	m_brick->setWidth(minScreenDim / GRID_RATIO * 5*2);
+	m_brick->setHeight(minScreenDim / GRID_RATIO * 5*2);
+	if(m_brokenBrick && !m_brokenBrick->loadFromFile("assets/brokenbrick.png"))
+	{
+		std::cerr << "Could not load broken brick texture.\n";
+	}
+	m_brokenBrick->setWidth(5*2);
+	m_brokenBrick->setHeight(5*2);
 	/*m_dimensions[0] = 10;
 	m_dimensions[1] = 10;
 	m_position[0] = 0;
@@ -18,6 +33,21 @@ Brick::Brick()
 Brick::Brick(float hwidth, float hheight, float x, float y, int pointVal)
 {
 	m_body = new PhysicsBody(new RectCollider(Point(0.0,0.0), hwidth, hheight), Vector(0.0,0.0), Point(x, y), false);
+	m_brick = new LTexture();
+	m_brokenBrick = new LTexture();
+	int minScreenDim = std::min(SCREEN_WIDTH, SCREEN_HEIGHT);
+	if(m_brick && !m_brick->loadFromFile("assets/brick.png"))
+	{
+		std::cerr << "Could not load brick texture.\n";
+	}
+	m_brick->setWidth(minScreenDim / GRID_RATIO * hwidth*2.0);
+	m_brick->setHeight(minScreenDim / GRID_RATIO * hheight*2.0);
+	if(m_brokenBrick && !m_brokenBrick->loadFromFile("assets/brokenbrick.png"))
+	{
+		std::cerr << "Could not load broken brick texture.\n";
+	}
+	m_brokenBrick->setWidth(minScreenDim / GRID_RATIO * hwidth*2.0);
+	m_brokenBrick->setHeight(minScreenDim / GRID_RATIO * hheight*2.0);
 	/*m_dimensions[0] = width;
 	m_dimensions[1] = height;
 	m_position[0] = x;
@@ -28,6 +58,16 @@ Brick::Brick(float hwidth, float hheight, float x, float y, int pointVal)
 }
 Brick::~Brick()
 {
+	if(m_brick != nullptr)
+	{
+		delete m_brick;
+		m_brick = nullptr;
+	}
+	if(m_brokenBrick != nullptr)
+	{
+		delete m_brokenBrick;
+		m_brokenBrick = nullptr;
+	}
 }
 
 void Brick::Update(World* world, double lastClock)
@@ -60,19 +100,24 @@ void Brick::Draw()
   	static_cast<int>(minScreenDim / GRID_RATIO * (centre[1] -dimensions[1])),  	
 	static_cast<int>(minScreenDim / GRID_RATIO * 2*dimensions[0]),  		
 	static_cast<int>(minScreenDim / GRID_RATIO * 2*dimensions[1]) };
-	if(m_health > 2)
+	if(m_health >= 2)
 	{
-		SDL_SetRenderDrawColor( gRenderer, 0x00, 0xFF, 0x00, 0xFF );
-	}
-	else if(m_health > 1)
-	{
+		if(m_brick != nullptr)
+		{
+			m_brick->render(minScreenDim / GRID_RATIO * (centre[0] -dimensions[0]), minScreenDim / GRID_RATIO * (centre[1] -dimensions[1]));
+		}
 		SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0x00, 0xFF );
 	}
 	else
 	{
+		if(m_brokenBrick != nullptr)
+		{
+			m_brokenBrick->render(minScreenDim / GRID_RATIO * (centre[0] -dimensions[0]), minScreenDim / GRID_RATIO * (centre[1] -dimensions[1]));
+		}
 		SDL_SetRenderDrawColor( gRenderer, 0xFF, 0x00, 0x00, 0xFF );
 	}
-	SDL_RenderFillRect( gRenderer, &fillRect );
+
+	//SDL_RenderFillRect( gRenderer, &fillRect );
 }
 
 bool Brick::CheckCollision(GameObject* other, Point& p)

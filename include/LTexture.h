@@ -39,7 +39,9 @@ class LTexture
 
 		//Gets image dimensions
 		int getWidth();
+		void setWidth(int width);
 		int getHeight();
+		void setHeight(int height);
 
 	private:
 		//The actual hardware texture

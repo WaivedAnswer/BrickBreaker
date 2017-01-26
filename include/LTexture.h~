@@ -2,7 +2,7 @@
 #ifndef _LTEXTURE_H
 #define _LTEXTURE_H
 #include "SDL2/SDL.h"
-
+#include <string>
 /*This source code copyrighted by Lazy Foo' Productions (2004-2015)
 and may not be redistributed without written permission.*/
 
@@ -39,7 +39,9 @@ class LTexture
 
 		//Gets image dimensions
 		int getWidth();
+		void setWidth(int width);
 		int getHeight();
+		void setHeight(int height);
 
 	private:
 		//The actual hardware texture
