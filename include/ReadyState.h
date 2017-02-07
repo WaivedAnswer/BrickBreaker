@@ -4,6 +4,7 @@
 #include "GameState.h"
 #include "LTexture.h"
 
+//Something wrong with cleanup and ltexture of this class causes faults and crashes
 //State to be used at start of new game
 class ReadyState : public GameState
 {

@@ -86,7 +86,7 @@ void World::CreateWorld()
 	//m_objList.push_back(new Actor());
 
 	m_objList.push_back(new StandardWall(GRID_RATIO/2.0, GRID_RATIO/20.0, GRID_RATIO/2.0, 0.0));
-	m_objList.push_back(new DeathWall(GRID_RATIO/2.0, GRID_RATIO/20.0, GRID_RATIO/2.0, GRID_RATIO+GRID_RATIO/20.0));
+	m_objList.push_back(new DeathWall(GRID_RATIO/2.0, GRID_RATIO/20.0, GRID_RATIO/2.0, GRID_RATIO));
 	m_objList.push_back(new StandardWall(GRID_RATIO/20.0, GRID_RATIO/2.0, 0.0, GRID_RATIO/2.0));
 	m_objList.push_back(new StandardWall(GRID_RATIO/20.0, GRID_RATIO/2.0, GRID_RATIO, GRID_RATIO/2.0));
 

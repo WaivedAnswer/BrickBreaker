@@ -70,9 +70,9 @@ void PlayState::Init()
 		std::cout << "Error, Error";
 		return;
 	}
-	game->PushState(ReadyState::Instance());
+	//game->PushState(ReadyState::Instance());
 	m_pauseTimer = PREPLAY_PAUSE;
-	m_lastClock = clock();
+	m_lastClock = static_cast<double>(clock());
 }
 void PlayState::Cleanup()
 {
@@ -103,7 +103,7 @@ void PlayState::Pause()
 void PlayState::Resume()
 {
 	//m_running = true;
-	m_lastClock = clock();
+	m_lastClock = static_cast<double>(clock());
 	m_pauseTimer = PREPLAY_PAUSE;
 }
 
@@ -201,6 +201,8 @@ void PlayState::HandleInput(GameEngine* game)
 					}
 					
 					break;
+				case SDLK_r:
+					game->ChangeState(GameOverState::Instance());
 			}
 		}
 		if(m_player != nullptr)

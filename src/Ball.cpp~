@@ -29,6 +29,7 @@ Ball::Ball()
 	{
 		std::cerr << "Could not load ball texture.\n";
 	}
+	int minScreenDim = std::min(SCREEN_WIDTH, SCREEN_HEIGHT);
 	m_ball->setWidth(minScreenDim / GRID_RATIO * m_dimensions[0] * 2.0);
 	m_ball->setHeight(minScreenDim / GRID_RATIO * m_dimensions[0] * 2.0);
 }
@@ -136,7 +137,7 @@ bool Ball::CheckCollision(GameObject* other, Point& p)
 	}
 	if(m_body->CheckCollision(other->GetPhysicsBody(), p))
 	{
-		lastCollision = other;
+		//lastCollision = other;
 		return true;
 	}
 	

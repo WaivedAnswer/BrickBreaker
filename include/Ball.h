@@ -38,6 +38,7 @@ class Ball : public GameObject
 		float m_speed;
 		float m_angle;
 		Player* m_player;
+		//lastCollision is causing issues do I even need to remember this
 		GameObject* lastCollision;
 		LTexture* m_ball;
 };

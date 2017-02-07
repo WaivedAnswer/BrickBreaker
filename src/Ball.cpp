@@ -55,7 +55,11 @@ Ball::Ball(float startSpeed, float startAngle)
 
 Ball::~Ball()
 {
-
+	if(m_ball != nullptr)
+	{
+		delete m_ball;
+		m_ball = nullptr;
+	}
 }
 
 void Ball::Update(World* world, double lastClock)
@@ -137,7 +141,7 @@ bool Ball::CheckCollision(GameObject* other, Point& p)
 	}
 	if(m_body->CheckCollision(other->GetPhysicsBody(), p))
 	{
-		lastCollision = other;
+		//lastCollision = other;
 		return true;
 	}
 	

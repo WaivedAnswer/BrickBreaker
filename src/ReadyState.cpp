@@ -27,10 +27,8 @@ ReadyState::~ReadyState()
 
 void ReadyState::Init()
 {
-	if(m_readyText == nullptr)
-	{
-		m_readyText = new LTexture();
-	}
+	Cleanup();
+	m_readyText = new LTexture();
 	SDL_Color color = { 255, 255, 255 };
 	if( !m_readyText->loadFromRenderedText( "Press Enter to Start!", color ))
 	{

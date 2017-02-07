@@ -3,7 +3,6 @@
 #define _READY_STATE_H
 #include "GameState.h"
 #include "LTexture.h"
-#include "World.h"
 
 //State to be used at start of new game
 class ReadyState : public GameState
