@@ -14,9 +14,9 @@ const int COORDNUM = 2;
 const float DEFAULT_BALL_SPEED = 40;
 const float DEFAULT_ACTOR_SPEED = 45;
 
-const float DEFAULT_BALL_ANGLE = -M_PI/2.0;
+const float DEFAULT_BALL_ANGLE = -M_PI/2.5;
 
-const double PREPLAY_PAUSE = 50; //ms
+const double PREPLAY_PAUSE = 500; //ms
 
 
 enum Directions

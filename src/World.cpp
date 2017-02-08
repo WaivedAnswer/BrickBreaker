@@ -67,8 +67,8 @@ void InitializeBrickList(std::list<GameObject*> &brickList)
 	float maxX = GRID_RATIO*0.8;
 	float maxY = GRID_RATIO*0.5;
 	//make rows
-	int colCount = 8;
-	int rowCount = 5;
+	int colCount = 5;
+	int rowCount = 4;
 	float brickWidth = (maxX-minX)/static_cast<float>(colCount);
 	float brickHeight = (maxY-minY)/static_cast<float>(rowCount);
 	for (int i = 0; i<rowCount; i++)

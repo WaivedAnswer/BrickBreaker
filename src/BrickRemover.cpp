@@ -7,10 +7,17 @@
 BrickRemover::BrickRemover(World* world)
 {
 	m_world = world;
+	m_brickCount = 0;
 }
 
 BrickRemover::~BrickRemover()
 {
+}
+
+
+int BrickRemover::GetBrickCount()
+{
+	return m_brickCount;
 }
 
 void BrickRemover::RemoveBricks()
@@ -19,7 +26,8 @@ void BrickRemover::RemoveBricks()
 	{
 		return;
 	}
-
+	//Sets brick count to 0, as bricks interact with brick increments brickCount
+	m_brickCount = 0;
 	for(std::list<GameObject*>::iterator it = m_world->GetObjectsBegin(); it!= m_world->GetObjectsEnd(); ++it)
 	{
 		(*it)->Interact(this);
@@ -36,9 +44,12 @@ void BrickRemover::RemoveBricks()
 
 void BrickRemover::InteractBrick(Brick* brick)
 {
-
 	if(brick->GetHealth()<=0)
 	{
 		m_removeList.push_back(brick);
+	}
+	else
+	{
+		m_brickCount++;
 	}
 }

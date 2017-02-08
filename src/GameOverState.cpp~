@@ -87,7 +87,7 @@ void GameOverState::Draw(GameEngine* game)
 	}
 	if(m_instructionsText != nullptr)
 	{
-		m_instructionsText->render( ( SCREEN_WIDTH - m_instructionsText->getWidth() )/2 , ( SCREEN_HEIGHT - m_instructionText->getHeight() )*2/3 );
+		m_instructionsText->render( ( SCREEN_WIDTH - m_instructionsText->getWidth() )/2 , ( SCREEN_HEIGHT - m_instructionsText->getHeight() )*2/3 );
 	}
 
 
@@ -118,6 +118,11 @@ void GameOverState::HandleInput(GameEngine* game)
 		}
 
 	}
+}
+
+void GameOverState::SetWin(bool win)
+{
+	m_didWin = win;
 }
 
 

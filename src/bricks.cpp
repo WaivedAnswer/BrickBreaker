@@ -239,6 +239,7 @@ int main( int argc, char* args[] )
 	std::clock_t fbegin, fend;
 	std::clock_t lastClock;
 	double ftime = 0.0;
+	std::cout << DEFAULT_BALL_ANGLE;
 	/*WORLD = new World();
 	WORLD->CreateWorld();
 	BrickRemover* bRemover = new BrickRemover(WORLD);

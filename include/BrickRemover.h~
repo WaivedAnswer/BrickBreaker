@@ -13,6 +13,7 @@ class BrickRemover : public ObjectVisitor
 		/*virtual void InteractActor(Actor* actor) {};
 		virtual void InteractBall(Ball* ball) {};
 		virtual void InteractWall(Wall* wall) {};*/
+		void SetBrickCount(int count);
 		int GetBrickCount();
 		void RemoveBricks();
 		virtual void InteractBrick(Brick* brick);

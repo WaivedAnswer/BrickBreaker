@@ -39,10 +39,21 @@ void GameOverState::Init()
 		m_instructionsText = new LTexture();
 	}
 	SDL_Color color = { 255, 255, 255 };
-	if( !m_gameOverText->loadFromRenderedText( "GAME OVER", color ))
+	if(m_didWin)
 	{
-		printf( "Failed to render gameOver texture!\n" );
-		return;
+		if( !m_gameOverText->loadFromRenderedText( "YOU WIN!", color ))
+		{
+			printf( "Failed to render gameOver texture!\n" );
+			return;
+		}
+	}
+	else
+	{
+		if( !m_gameOverText->loadFromRenderedText( "GAME OVER", color ))
+		{
+			printf( "Failed to render gameOver texture!\n" );
+			return;
+		}
 	}
 	if( !m_instructionsText->loadFromRenderedText( "Press N for new game or M for menu", color ))
 	{
@@ -118,6 +129,11 @@ void GameOverState::HandleInput(GameEngine* game)
 		}
 
 	}
+}
+
+void GameOverState::SetWin(bool win)
+{
+	m_didWin = win;
 }
 
 

@@ -70,7 +70,7 @@ void PlayState::Init()
 		std::cout << "Error, Error";
 		return;
 	}
-	game->PushState(ReadyState::Instance());
+	//game->PushState(ReadyState::Instance());
 	m_pauseTimer = PREPLAY_PAUSE;
 	m_lastClock = static_cast<double>(clock());
 }
@@ -121,6 +121,11 @@ void PlayState::Update(GameEngine* game)
 		if(m_bRemover != nullptr)
 		{
 			m_bRemover->RemoveBricks();
+			if(m_bRemover->GetBrickCount()<=0)
+			{
+				GameOverState::Instance()->SetWin(true);
+				game->ChangeState(GameOverState::Instance());
+			}
 		}
 		if(m_player != nullptr)
 		{

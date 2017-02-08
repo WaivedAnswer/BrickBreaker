@@ -121,11 +121,17 @@ void PlayState::Update(GameEngine* game)
 		if(m_bRemover != nullptr)
 		{
 			m_bRemover->RemoveBricks();
+			if(m_bRemover->GetBrickCount()<=0)
+			{
+				GameOverState::Instance()->SetWin(true);
+				game->ChangeState(GameOverState::Instance());
+			}
 		}
 		if(m_player != nullptr)
 		{
 			if(m_player->GetLives() <=0)
 			{
+				GameOverState::Instance()->SetWin(false);
 				game->ChangeState(GameOverState::Instance());
 			}
 		}
