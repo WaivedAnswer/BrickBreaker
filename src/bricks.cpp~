@@ -64,7 +64,7 @@ bool init()
 		}
 
 		//Create window
-		gWindow = SDL_CreateWindow( "SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
+		gWindow = SDL_CreateWindow( "BrickBreaker", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
 		if( gWindow == NULL )
 		{
 			printf( "Window could not be created! SDL Error: %s\n", SDL_GetError() );
@@ -287,20 +287,13 @@ int main( int argc, char* args[] )
 			{
 				
 				fbegin = clock();
-				
-				game->HandleInput();
-		
-				game->Update();
-		
-				game->Draw();
-
-				ftime = GetTime(fbegin);
-				if(ftime < frameTime)
+				do
 				{
-					
-					SDL_Delay(frameTime - ftime);
-				}
-
+					game->HandleInput();
+					game->Update();
+					ftime = GetTime(fbegin);
+				} while(ftime < frameTime);
+				game->Draw();
 			}
 			delete game;
 		}

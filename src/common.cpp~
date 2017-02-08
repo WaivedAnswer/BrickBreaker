@@ -153,6 +153,6 @@ bool Point::operator ==(const Point& other) const
 double GetTime(double lastClock)
 {
 	clock_t curr = clock();
-	return (static_cast<double>(curr) - lastClock)/CLOCKS_PER_SEC;
+	return 1000.0* (static_cast<double>(curr) - lastClock)/CLOCKS_PER_SEC;
 }
 

@@ -11,8 +11,8 @@ extern World* WORLD;
 
 const int COORDNUM = 2;
 
-const float DEFAULT_BALL_SPEED = 750;
-const float DEFAULT_ACTOR_SPEED = 750;
+const float DEFAULT_BALL_SPEED = 40;
+const float DEFAULT_ACTOR_SPEED = 45;
 
 const float DEFAULT_BALL_ANGLE = -M_PI/2.0;
 

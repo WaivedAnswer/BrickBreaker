@@ -11,12 +11,12 @@ extern World* WORLD;
 
 const int COORDNUM = 2;
 
-const float DEFAULT_BALL_SPEED = 750;
-const float DEFAULT_ACTOR_SPEED = 750;
+const float DEFAULT_BALL_SPEED = 45;
+const float DEFAULT_ACTOR_SPEED = 50;
 
 const float DEFAULT_BALL_ANGLE = -M_PI/2.0;
 
-const double PREPLAY_PAUSE = 500; //ms
+const double PREPLAY_PAUSE = 50; //ms
 
 
 enum Directions

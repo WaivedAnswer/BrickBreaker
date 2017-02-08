@@ -287,20 +287,13 @@ int main( int argc, char* args[] )
 			{
 				
 				fbegin = clock();
-				
-				game->HandleInput();
-		
-				game->Update();
-		
-				game->Draw();
-
-				ftime = GetTime(fbegin);
-				if(ftime < frameTime)
+				do
 				{
-					
-					SDL_Delay(frameTime - ftime);
-				}
-
+					game->HandleInput();
+					game->Update();
+					ftime = GetTime(fbegin);
+				} while(ftime < frameTime);
+				game->Draw();
 			}
 			delete game;
 		}
