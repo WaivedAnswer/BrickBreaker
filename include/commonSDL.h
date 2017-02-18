@@ -1,8 +1,16 @@
 //commonSDL.h
 #ifndef _COMMON_SDL_H
 #define _COMMON_SDL_H
+#ifdef __linux__
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_ttf.h"
+#include "SDL2/SDL_image.h"
+#elif __APPLE__
+#include "SDL2/SDL.h"
+#include "SDL2_ttf/SDL_ttf.h"
+#include "SDL2_image/SDL_image.h"
+#endif
+
 
 //SDL related
 const float GRID_RATIO = 100;

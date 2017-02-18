@@ -62,23 +62,19 @@ void PhysicsBody::HandleCollision(PhysicsBody* other, const Point& p)
 		//std::cout << "Intersect x: " <<p.x << " y: " <<p.y <<"\n";
 		//right now just reflections, no actual momentum transfer
 		Vector osurfaceNormal = oCollider->GetSurfaceNormal(p);
-		//std::cout << "Original Vector x: " <<m_velocity.x << " y: " <<m_velocity.y <<"\n";
-		//std::cout << "Normal Vector x: " <<osurfaceNormal.x << " y: " <<osurfaceNormal.y <<"\n";
+
 		Vector reflect = m_velocity - 2.0*Dot(m_velocity, osurfaceNormal)*osurfaceNormal;
-		//std::cout << "Reflect Vector x: " <<reflect.x << " y: " <<reflect.y <<"\n";
 		
 		this->SetVelocity(reflect);
 	}
+    
 	if(other->IsKinematic())
 	{
-		//std::cout << "Intersect x: " <<p.x << " y: " <<p.y <<"\n";
 		//right now just reflections
 		Vector surfaceNormal = m_collider->GetSurfaceNormal(p);
 		Vector oVelocity = other->GetVelocity();
-		//std::cout << "Original Vector x: " <<oVelocity.x << " y: " <<oVelocity.y <<"\n";
-		//std::cout << "Normal Vector x: " <<surfaceNormal.x << " y: " <<surfaceNormal.y <<"\n";
 		Vector reflect = oVelocity - 2.0*Dot(oVelocity, surfaceNormal)*surfaceNormal;
-		//std::cout << "Reflect Vector x: " <<reflect.x << " y: " <<reflect.y <<"\n";
+        
 		other->SetVelocity(reflect);
 	}
 	

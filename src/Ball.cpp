@@ -107,34 +107,6 @@ void Ball::Draw()
 bool Ball::CheckCollision(GameObject* other, Point& p)
 {
 
-	/*//std::cout << "Called.";
-	//TODO look into a more graceful version of this
-	float* otherDim = other->GetDimensions();
-	float* otherPos = other->GetPosition();
-	float mleft = m_position[0];
-	float mright = m_position[0] + m_dimensions[0];
-	float mtop = m_position[1];
-	float mbot = m_position[1] + m_dimensions[1];
-	float oleft = otherPos[0];
-	float oright = otherPos[0] + otherDim[0];
-	float otop = otherPos[1];
-	float obot = otherPos[1] + otherDim[1];
-
-	bool leftOverlap = mleft < oright && mleft > oleft;
-	bool rightOverlap = mright > oleft && mright < oright;
-	bool topOverlap = mtop < obot && mtop > otop;
-	bool botOverlap = mbot > otop && mbot < obot;
-
-	if((leftOverlap || rightOverlap) && (topOverlap || botOverlap))
-	{
-		
-		//std::cout << leftOverlap << rightOverlap << topOverlap << botOverlap;
-		lastCollision = other;
-		return true;
-	}
-
-	return false;*/
-
 	if(other == nullptr || other == this || other == lastCollision )
 	{
 		return false;
@@ -162,7 +134,6 @@ void Ball::Interact(GameObject* other)
 //not sure if needed just now?
 void Ball::InteractBrick(Brick* brick)
 {
-	std::cout << "Here. " <<std::endl;
 	brick->HitBrick();
 	if(m_player == nullptr)
 	{

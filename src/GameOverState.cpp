@@ -4,7 +4,6 @@
 #include "common.h"
 #include "MenuState.h"
 #include "PlayState.h"
-#include "SDL2/SDL.h"
 
 GameOverState* GameOverState::m_instance = nullptr;
 

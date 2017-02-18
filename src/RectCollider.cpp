@@ -34,7 +34,6 @@ bool RectCollider::CheckCollision(Collider* other, Point& p)
 
 bool RectCollider::CheckCollisionCircle(CircleCollider* other, Point& p)
 {
-	//std::cout << "Rect to Circle\n";
 	if(other == nullptr)
 	{
 		return false;
@@ -47,7 +46,6 @@ bool RectCollider::CheckCollisionCircle(CircleCollider* other, Point& p)
 
 bool RectCollider::CheckCollisionRect(RectCollider* other, Point& p)
 {
-	//std::cout << "Rect to Rect\n";
 	if(other == nullptr)
 	{
 		return false;
@@ -78,7 +76,6 @@ Vector RectCollider::GetSurfaceNormal(const Point& p)
 	float down = Dot(dir, normal::DOWN)/m_dimensions[1];
 	float left = Dot(dir, normal::LEFT)/m_dimensions[0];
 	float right = Dot(dir, normal::RIGHT)/m_dimensions[0];
-	//std::cout << up << down << left << right;
 	float max = std::max({up,down,left,right});
 	
 	if(max == up)

@@ -5,9 +5,6 @@ and may not be redistributed without written permission.*/
 //TODO create audio components
 //TODO reformat to be able to use colour struct with draw application, can reuse etc.
 //Using SDL, SDL_image, standard IO, math, and strings
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL_ttf.h>
 #include <stdio.h>
 #include <string>
 #include <cmath>
@@ -239,18 +236,7 @@ int main( int argc, char* args[] )
 	std::clock_t fbegin, fend;
 	std::clock_t lastClock;
 	double ftime = 0.0;
-	std::cout << DEFAULT_BALL_ANGLE;
-	/*WORLD = new World();
-	WORLD->CreateWorld();
-	BrickRemover* bRemover = new BrickRemover(WORLD);
-	Player* player1= new Player();
-	player1->SetActor(new Actor());
-
-	Ball* ball = new Ball();
-	ball->SetPlayer(player1);
-
-	WORLD->Add(player1->GetActor());
-	WORLD->Add(ball);*/
+    
 	int frames = 0;
 	//Start up SDL and create window
 	if( !init() )

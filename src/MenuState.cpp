@@ -87,8 +87,6 @@ void MenuState::Draw(GameEngine* game)
 	SDL_SetRenderDrawColor( gRenderer, 0x00, 0x00, 0x00, 0xFF );
 	SDL_RenderClear( gRenderer ); 
 	
-	//menu->Draw();
-	//std::cout << m_menu;
 	if(m_menu != nullptr)
 	{
 		m_menu->Display();

@@ -1,8 +1,5 @@
 //LTexture.cpp
 #include "LTexture.h"
-#include "SDL2/SDL.h"
-#include "SDL2/SDL_ttf.h"
-#include "SDL2/SDL_image.h"
 #include "commonSDL.h"
 #include "common.h"
 LTexture::LTexture()

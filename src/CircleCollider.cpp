@@ -23,7 +23,6 @@ bool CircleCollider::CheckCollision(Collider* other, Point& p)
 
 bool CircleCollider::CheckCollisionCircle(CircleCollider* other, Point& p)
 {
-	//std::cout << "Circle to Circle\n";
 	if(other == nullptr)
 	{
 		return false;
@@ -44,7 +43,6 @@ bool CircleCollider::CheckCollisionCircle(CircleCollider* other, Point& p)
 
 bool CircleCollider::CheckCollisionRect(RectCollider* other, Point& p)
 {
-	//std::cout << "Circle to Rect\n";
 	if(other == nullptr)
 	{
 		return false;

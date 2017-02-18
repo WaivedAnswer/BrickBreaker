@@ -5,11 +5,10 @@
 Vector Vector::Normalize()
 {
 	float length = sqrt(Dot(*this,*this));
-	//std::cout << *this << "\n";
-	//std::cout << length << "\n";
+
 	x = x/length;
 	y = y/length;
-	//std::cout << *this << "\n";
+    
 	return *this;
 }
 
@@ -96,6 +95,9 @@ float Point::operator [](int index) const
 			return x;
 		case 1:
 			return y;
+        default:
+            //should never reach
+            return x;
 	}
 }
 
@@ -108,6 +110,10 @@ float& Point::operator [](int index)
 			return x;
 		case 1:
 			return y;
+        default:
+            //should never reach
+            return x;
+            
 	}
 }
 

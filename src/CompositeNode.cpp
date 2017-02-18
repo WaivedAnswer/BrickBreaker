@@ -1,7 +1,5 @@
 //CompositeNode.cpp
 #include "CompositeNode.h"
-#include "SDL2/SDL.h"
-#include <SDL2/SDL_ttf.h>
 #include "LTexture.h"
 #include "common.h"
 #include "commonSDL.h"
