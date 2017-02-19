@@ -28,8 +28,10 @@ PlayState::PlayState()
 	m_bRemover = nullptr;
 	m_player = nullptr;
 	m_ball = nullptr;
+    m_musicSource = nullptr;
 	m_lastClock = 0;
 	m_pauseTimer = 0;
+    
 	
 }
 PlayState::~PlayState()
@@ -70,9 +72,19 @@ void PlayState::Init()
 		std::cout << "Error, Error";
 		return;
 	}
+    
+    m_musicSource = new AudioSource();
+    if(m_musicSource != nullptr)
+    {
+        m_musicSource->LoadClipFromFile("assets/pacman_intro.wav" , CLIP_MUSIC);
+        m_musicSource->Play(-1, 0.20);
+    }
+    
 	//game->PushState(ReadyState::Instance());
 	m_pauseTimer = PREPLAY_PAUSE;
 	m_lastClock = static_cast<double>(clock());
+    
+
 }
 void PlayState::Cleanup()
 {
@@ -92,6 +104,14 @@ void PlayState::Cleanup()
 		delete m_bRemover;
 		m_bRemover = nullptr;
 	}
+    
+    if(m_musicSource != nullptr)
+    {
+        m_musicSource->Stop();
+        delete m_musicSource;
+        m_musicSource = nullptr;
+
+    }
 	m_running = false;
 }
 

@@ -24,11 +24,18 @@ Ball::Ball()
 	m_player = nullptr;
 	lastCollision = nullptr;
 	m_canMove = true;
+    
 	m_ball = new LTexture();
 	if(!m_ball->loadFromFile("assets/ball.png"))
 	{
 		std::cerr << "Could not load ball texture.\n";
 	}
+    
+    m_musicSource = new AudioSource();
+    if(m_musicSource != nullptr)
+    {
+        m_musicSource->LoadClipFromFile("assets/blip.wav", CLIP_EFFECT);
+    }
 	int minScreenDim = std::min(SCREEN_WIDTH, SCREEN_HEIGHT);
 	m_ball->setWidth(minScreenDim / GRID_RATIO * m_dimensions[0] * 2.0);
 	m_ball->setHeight(minScreenDim / GRID_RATIO * m_dimensions[0] * 2.0);
@@ -51,6 +58,12 @@ Ball::Ball(float startSpeed, float startAngle)
 	{
 		std::cerr << "Could not load ball texture.\n";
 	}
+    
+    m_musicSource = new AudioSource();
+    if(m_musicSource != nullptr)
+    {
+        m_musicSource->LoadClipFromFile("assets/blip.wav", CLIP_EFFECT);
+    }
 }
 
 Ball::~Ball()
@@ -60,6 +73,11 @@ Ball::~Ball()
 		delete m_ball;
 		m_ball = nullptr;
 	}
+    if(m_musicSource != nullptr)
+    {
+        delete m_musicSource;
+        m_musicSource = nullptr;
+    }
 }
 
 void Ball::Update(World* world, double lastClock)
@@ -78,7 +96,12 @@ void Ball::Update(World* world, double lastClock)
 		{
 			this->UnMove(lastClock);
 			m_body->HandleCollision((*it)->GetPhysicsBody(), intersect);
+            
 			(*it)->InteractBall(this);
+            if(m_musicSource != nullptr)
+            {
+                m_musicSource->Play(0, 0.20);
+            }
 		}
 	}
 }
@@ -128,13 +151,18 @@ void Ball::Interact(ObjectVisitor* visitor)
 
 void Ball::Interact(GameObject* other)
 {
+    if(m_musicSource != nullptr)
+    {
+        m_musicSource->Play();
+    }
 	other->InteractBall(this);
 }
 
 //not sure if needed just now?
 void Ball::InteractBrick(Brick* brick)
 {
-	brick->HitBrick();
+    
+	/*brick->HitBrick();
 	if(m_player == nullptr)
 	{
 		return;
@@ -147,7 +175,7 @@ void Ball::InteractBrick(Brick* brick)
 	else
 	{
 		m_player->SetScore(m_player->GetScore() + 5.0 * brick->GetPointValue());
-	}
+	}*/
 	/*if(brick->GetHealth() <= 0)
 	{
 		WORLD->Remove(brick);
@@ -157,6 +185,10 @@ void Ball::InteractBrick(Brick* brick)
 
 void Ball::InteractActor(Actor* actor)
 {
+    if(m_musicSource != nullptr)
+    {
+        m_musicSource->Play();
+    }
 	this->SetPlayer(actor->GetPlayer());
 	//TODO implement later
 }

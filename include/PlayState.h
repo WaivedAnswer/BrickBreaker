@@ -5,6 +5,7 @@
 #include "World.h"
 #include "Player.h"
 #include "BrickRemover.h"
+#include "AudioSource.h"
 //TODO create singleton
 class PlayState : public GameState
 {
@@ -35,6 +36,7 @@ class PlayState : public GameState
 		BrickRemover* m_bRemover;
 		Player* m_player;
 		Ball* m_ball;
+        AudioSource* m_musicSource;
 		double m_lastClock;
 		//used for timed pauses;
 		double m_pauseTimer;

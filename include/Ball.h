@@ -5,6 +5,7 @@
 #include "common.h"
 #include "Player.h"
 #include "LTexture.h"
+#include "AudioSource.h"
 //TODO maybe make the visitor/interactor separate from ball, just get reference to ball and interact items with it
 
 class Ball : public GameObject
@@ -38,6 +39,7 @@ class Ball : public GameObject
 		float m_speed;
 		float m_angle;
 		Player* m_player;
+        AudioSource* m_musicSource;
 		//lastCollision is causing issues do I even need to remember this
 		GameObject* lastCollision;
 		LTexture* m_ball;
