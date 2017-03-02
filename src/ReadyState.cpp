@@ -41,7 +41,7 @@ void ReadyState::Cleanup()
 	if(m_readyText != nullptr)
 	{
 		delete m_readyText;
-		m_readyText == nullptr;
+		m_readyText = nullptr;
 	}
 }
 

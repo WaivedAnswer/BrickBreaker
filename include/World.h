@@ -12,6 +12,8 @@ class World
 		void Update(double lastClock);
 		void Draw();
 		void CreateWorld();
+        //accepts json file to load world from
+        void CreateWorld(std::string filename);
 		void Add(GameObject* object);
 		//also deletes memory of object
 		void Remove(GameObject* object);

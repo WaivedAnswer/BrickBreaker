@@ -240,11 +240,9 @@ void InitializeBrickList(std::list<Brick*> &brickList)
 int main( int argc, char* args[] )
 {
 	double frameTime = 20;
-	std::clock_t fbegin, fend;
-	std::clock_t lastClock;
+    std::clock_t fbegin;
 	double ftime = 0.0;
     
-	int frames = 0;
 	//Start up SDL and create window
 	if( !init() )
 	{
@@ -258,9 +256,7 @@ int main( int argc, char* args[] )
 			printf( "Failed to load media!\n" );
 		}
 		else
-		{	
-			//Main loop flag
-			bool quit = false;
+		{
 			GameEngine* game = GameEngine::Instance();
 			if(game == nullptr)
 			{

@@ -141,6 +141,6 @@ MenuNode* CompositeNode::GetCurrSelection()
 
 int CompositeNode::GetChildCount()
 {
-	return m_children.size();
+	return static_cast<int>(m_children.size());
 }
 

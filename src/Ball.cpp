@@ -100,7 +100,7 @@ void Ball::Update(World* world, double lastClock)
 			(*it)->InteractBall(this);
             if(m_musicSource != nullptr)
             {
-                m_musicSource->Play(0, 0.20);
+                m_musicSource->Play(0, 0.10);
             }
 		}
 	}
@@ -114,17 +114,13 @@ void Ball::Draw()
 	m_body->GetDimensions(dimensions);
 	Point centre = m_body->GetPosition();
 	int minScreenDim = std::min(SCREEN_WIDTH, SCREEN_HEIGHT);
-	SDL_Rect fillRect = { 
-	static_cast<int>(minScreenDim / GRID_RATIO * (centre[0] -dimensions[0])),
-  	static_cast<int>(minScreenDim / GRID_RATIO * (centre[1] -dimensions[1])),  	
-	static_cast<int>(minScreenDim / GRID_RATIO * 2*dimensions[0]),  		
-	static_cast<int>(minScreenDim / GRID_RATIO * 2*dimensions[1]) };
+    
 	if(m_ball != nullptr)
 	{
 		m_ball->render(minScreenDim / GRID_RATIO *(centre[0] -dimensions[0]), minScreenDim / GRID_RATIO * (centre[1] -dimensions[1]));
 	}
 	SDL_SetRenderDrawColor( gRenderer, 0xFF, 0x00, 0xFF, 0xFF );
-	//SDL_RenderFillRect( gRenderer, &fillRect );
+    
 }
 
 bool Ball::CheckCollision(GameObject* other, Point& p)
