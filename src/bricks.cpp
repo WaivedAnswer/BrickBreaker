@@ -12,7 +12,6 @@ and may not be redistributed without written permission.*/
 #include "Actor.h"
 #include "Ball.h"
 #include "Wall.h"
-#include "Brick.h"
 #include "PhysicsBody.h"
 #include "RectCollider.h"
 #include "CircleCollider.h"
@@ -143,99 +142,9 @@ void close()
 	SDL_Quit();
 }
 
-/*SDL_Texture* loadTexture( std::string path )
-{
-	//The final texture
-	SDL_Texture* newTexture = NULL;
 
-	//Load image at specified path
-	SDL_Surface* loadedSurface = IMG_Load( path.c_str() );
-	if( loadedSurface == NULL )
-	{
-		printf( "Unable to load image %s! SDL_image Error: %s\n", path.c_str(), IMG_GetError() );
-	}
-	else
-	{
-		//Create texture from surface pixels
-        newTexture = SDL_CreateTextureFromSurface( gRenderer, loadedSurface );
-		if( newTexture == NULL )
-		{
-			printf( "Unable to create texture from %s! SDL Error: %s\n", path.c_str(), SDL_GetError() );
-		}
 
-		//Get rid of old loaded surface
-		SDL_FreeSurface( loadedSurface );
-	}
 
-	return newTexture;
-}*/
-//move to return commands later
-Directions HandleMoveInput(SDL_Event e, Actor* actor)
-{
-	switch( e.key.keysym.sym ) 
-	{ 
-		case SDLK_LEFT:
-			return LEFT;
-			//actor->Move(LEFT);
-			break;
-		case SDLK_RIGHT:
-			return RIGHT;
-			//actor->Move(RIGHT);
-			break;
-		case SDLK_UP:
-			//actor->Move(UP);
-			break;
-		case SDLK_DOWN:
-			//actor->Move(DOWN);
-			break;
-		default:
-			break;
-		
-	}
-	return NONE;
-}
-
-/*void BounceTest(int frames, Ball* ball)
-{
-	ball->Move();
-	if(frames%40 ==0)
-	{
-		ball->Bounce(RIGHT);
-	}
-	else if(frames%40 ==10)
-	{
-		ball->Bounce(DOWN);
-	}
-	else if(frames%40 ==20)
-	{
-		ball->Bounce(LEFT);
-	}
-	else if(frames%40 ==30)
-	{
-		ball->Bounce(UP);
-	}
-}*/
-
-void InitializeBrickList(std::list<Brick*> &brickList)
-{
-	float minX = GRID_RATIO/10.0;
-	float minY = GRID_RATIO/10.0;
-	float maxX = GRID_RATIO/10.0*9.0;
-	float maxY = GRID_RATIO/10.0*5.0;
-	//make rows
-	int colCount = 8;
-	int rowCount = 5;
-	float brickWidth = (maxX-minX)/static_cast<float>(colCount);
-	float brickHeight = (maxY-minY)/static_cast<float>(rowCount);
-	for (int i = 0; i<rowCount; i++)
-	{
-		for (int j=0; j<colCount; j++)
-		{
-			brickList.push_back(new Brick(brickWidth, brickHeight, minX + brickWidth*j, minY + brickHeight*i, 10));
-		}
-		
-	}
-}
 
 int main( int argc, char* args[] )
 {

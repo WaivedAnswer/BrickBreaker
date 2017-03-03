@@ -3,6 +3,8 @@
 #include "Actor.h"
 #include "Ball.h"
 #include "Brick.h"
+#include "UnbreakableBrick.h"
+#include "StandardBrick.h"
 #include "Wall.h"
 #include "StandardWall.h"
 #include "DeathWall.h"
@@ -83,7 +85,7 @@ void InitializeBrickList(std::list<GameObject*> &brickList)
 	{
 		for (int j=0; j<colCount; j++)
 		{
-			brickList.push_back(new Brick(brickWidth/2.0, brickHeight/2.0, minX + brickWidth*j, minY + brickHeight*i, 10));
+			brickList.push_back(new StandardBrick(brickWidth/2.0, brickHeight/2.0, minX + brickWidth*j, minY + brickHeight*i, 0));
 		}
 		
 	}
@@ -164,14 +166,19 @@ void World::CreateWorld(std::string filename)
     {
         if(idMap[*it] == "Brick")
         {
-            Brick* brick = new Brick(brickWidth/2.0, brickHeight/2.0, minX + brickWidth*(count%tileWidth), minY + brickHeight*static_cast<int>(count/tileWidth), 10);
+            Brick* brick = new StandardBrick(brickWidth/2.0, brickHeight/2.0, minX + brickWidth*(count%tileWidth), minY + brickHeight*static_cast<int>(count/tileWidth), 10);
             m_objList.push_back(brick);
         }
-        else if(idMap[*it] == "Brick2")
+        else if(idMap[*it] == "Broken")
         {
-            Brick* brokenBrick = new Brick(brickWidth/2.0, brickHeight/2.0, minX + brickWidth*(count%tileWidth), minY + brickHeight*static_cast<int>(count/tileWidth), 10);
+            Brick* brokenBrick = new StandardBrick(brickWidth/2.0, brickHeight/2.0, minX + brickWidth*(count%tileWidth), minY + brickHeight*static_cast<int>(count/tileWidth), 10);
             brokenBrick->HitBrick();
             m_objList.push_back(brokenBrick);
+        }
+        else if(idMap[*it] == "UnBreakable")
+        {
+            Brick* unBreakableBrick = new UnBreakableBrick(brickWidth/2.0, brickHeight/2.0, minX + brickWidth*(count%tileWidth), minY + brickHeight*static_cast<int>(count/tileWidth));
+            m_objList.push_back(unBreakableBrick);
         }
         count++;
     }

@@ -48,7 +48,7 @@ void PlayState::Init()
 		return;
 	}
 	//m_world->CreateWorld();
-    m_world->CreateWorld("assets/Level0_2.json");
+    m_world->CreateWorld("assets/Blocked.json");
 	m_bRemover = new BrickRemover(m_world);
 
 	m_player = new Player();
